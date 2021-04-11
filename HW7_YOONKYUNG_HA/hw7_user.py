@@ -51,8 +51,10 @@ while True:
             f.write("%s: Device2: Heartbeat=%d, Steps=%d, Cal=%d\n" % (t, msg2[0], msg2[1], msg2[2]))
     elif device == 'quit':
         print('quit')
-        conn.close()
-        conn2.close()
+        conn.send(b'quit')
+        conn2.send(b'quit')
+        # conn.close()
+        # conn2.close()
         break
     else:
         print('Error')
