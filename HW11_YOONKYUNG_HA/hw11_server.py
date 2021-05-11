@@ -25,15 +25,10 @@ while True:
                 s.close()
                 socks.remove(s)
                 continue
-            # print("Recieved: ", data.decode())
             print(data.decode())
             for s in w_sock:
                 if s != s_sock:
                     s.send(data)
-            # for sock in socks:
-            #     if sock != s:
-            #         sock.send(data)
-            
-            # s.send(data)
+
 
 s_sock.close()
