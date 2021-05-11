@@ -12,7 +12,7 @@ socks.append(s_sock)
 print(str(PORT) + "에서 접속 대기 중")
 
 while True:
-    r_sock, w_sock, e_sock = select.select(socks, [], [])
+    r_sock, w_sock, e_sock = select.select(socks, socks, [])
 
     for s in r_sock:
         if s == s_sock:
@@ -27,6 +27,13 @@ while True:
                 continue
             # print("Recieved: ", data.decode())
             print(data.decode())
-            s.send(data)
+            for s in w_sock:
+                if s != s_sock:
+                    s.send(data)
+            # for sock in socks:
+            #     if sock != s:
+            #         sock.send(data)
+            
+            # s.send(data)
 
 s_sock.close()
